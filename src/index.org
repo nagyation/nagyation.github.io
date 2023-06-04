@@ -1,0 +1,43 @@
+#+options: html-link-use-abs-url:nil html-postamble:auto
+#+options: html-preamble:t html-scripts:nil html-style:t
+#+options: html5-fancy:nil tex:t
+#+options: num:0 toc:nil
+#+options: author:nil timestamp:nil
+#+html_doctype: xhtml-strict
+#+html_container: div
+#+html_content_class: content
+#+description:
+#+keywords:
+#+html_link_home:
+#+html_link_up:
+#+html_mathjax:
+#+html_equation_reference_format: \eqref{%s}
+#+html_head_extra:
+#+infojs_opt:
+#+creator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2.50 (<a href="https://orgmode.org">Org</a> mode 9.5.5)
+#+latex_header:
+#+LANGUAGE: ar
+#+AUTHOR: Mahmoud Nagy Adam
+#+EMAIL: mnagy1312@gamil.com
+#+SETUPFILE: ./css/white_clean.theme
+#+HTML_HEAD: <div class="header">
+#+HTML_HEAD:   <a href="index.html" class="logo" >خــواطر نــاجي</a>
+#+HTML_HEAD:   <br>
+#+HTML_HEAD:     <a href="index.html" class="page_hover">الخواطر</a>
+#+HTML_HEAD:     <a href="about.html" class="page_hover">عني</a>
+#+HTML_HEAD: </div>
+
+* عن المدونة
+السلام عليكم ورحمة الله وبركاته، مرحبا بكم، خواطر ناجي هي مدونة ساكتب
+فيها خواطري و افكاري و ما تعلمت في مختلف المجالات باللغة العربية
+الفصحة، المدونة عبارة عن صفحات *HTML* ثابتة كتبت عن طريق *Emacs* و نشرت عن
+طريق *Github Pages،* لا يوجد من يتبعك هنا من مواقع او الاعلانات، انت هنا
+بامان قليلا...
+
+انا لست هنا لاتحدث عن موضوع بعينه، بل سأكتب عن كثير من الاشياء اللتي
+اراها مفيدة و شيقة إن كانت في مجال الحاسبات أو غيره، ارجوا أن يوفقني
+الله و تجد ما يفيدك في الخواطر.
+
+* الخواطر:
+
+-  [[file:posts/rehlt-dvorak/rehlt-dvorak.org][رحلتي مع دفورك]]

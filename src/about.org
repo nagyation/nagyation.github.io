@@ -1,0 +1,37 @@
+#+options: html-link-use-abs-url:nil html-postamble:auto
+#+options: html-preamble:t html-scripts:nil html-style:t
+#+options: html5-fancy:nil tex:t
+#+options: num:0 toc:nil
+#+options: author:nil timestamp:nil
+#+html_doctype: xhtml-strict
+#+html_container: div
+#+html_content_class: content
+#+description:
+#+keywords:
+#+html_link_home:
+#+html_link_up:
+#+html_mathjax:
+#+html_equation_reference_format: \eqref{%s}
+#+html_head_extra:
+#+infojs_opt:
+#+creator: <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2.50 (<a href="https://orgmode.org">Org</a> mode 9.5.5)
+#+latex_header:
+#+LANGUAGE: ar
+#+AUTHOR: Mahmoud Nagy Adam
+#+EMAIL: mnagy1312@gamil.com
+#+SETUPFILE: ./css/white_clean.theme
+#+HTML_HEAD: <div class="header">
+#+HTML_HEAD:   <a href="index.html" class="logo" >خــواطر نــاجي</a>
+#+HTML_HEAD:   <br>
+#+HTML_HEAD:     <a href="index.html" class="page_hover">الخواطر</a>
+#+HTML_HEAD:     <a href="about.html" class="page_hover">عني</a>
+#+HTML_HEAD: </div>
+
+* من انا؟
+أنا مهندس كمبيوتر مهوس بعالم برمجة نظم التشغيل بالأخص لينكس، و مهوس
+ايضا بالبرامج الحرة (Libre software) ومفتوحة المصدر (open source)،
+أعمل لدى أمازون كمطور نواة لينكس (Linux Kernel Developer) في
+دريسدن. وسابقا كنت اعمل في مجال انترنت الاشياء (IOT) ولينكس المدمج
+(Embedded Linux)، من محبين استخدام إيماكس و لغة البرمجة سي.
+
+يمكنك التواصل معي عن طريق البريد الاكتروني:
