@@ -20,12 +20,7 @@
 #+AUTHOR: Mahmoud Nagy Adam
 #+EMAIL: mnagy1312@gamil.com
 #+SETUPFILE: ./css/white_clean.theme
-#+HTML_HEAD: <div class="header">
-#+HTML_HEAD:   <a href="index.html" class="logo" >خــواطر نــاجي</a>
-#+HTML_HEAD:   <br>
-#+HTML_HEAD:     <a href="index.html" class="page_hover">الخواطر</a>
-#+HTML_HEAD:     <a href="about.html" class="page_hover">عني</a>
-#+HTML_HEAD: </div>
+#+SETUPFILE: ./css/main_header.org
 
 * من انا؟
 أنا مهندس كمبيوتر مهوس بعالم برمجة نظم التشغيل بالأخص لينكس، و مهوس

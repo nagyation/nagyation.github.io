@@ -1,0 +1,6 @@
+#+HTML_HEAD: <div class="header">
+#+HTML_HEAD:   <a href="index.html" class="logo" >خواطر ناجي</a>
+#+HTML_HEAD:   <br>
+#+HTML_HEAD:     <a href="index.html" class="page_hover">الخواطر</a>
+#+HTML_HEAD:     <a href="about.html" class="page_hover">عني</a>
+#+HTML_HEAD: </div>

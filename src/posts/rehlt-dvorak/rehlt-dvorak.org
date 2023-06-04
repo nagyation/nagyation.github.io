@@ -23,13 +23,7 @@
 #+subtitle: بسم الله الرحمن الرحيم
 #+DATE: <2023-05-16 Tue>
 #+SETUPFILE: ./../../css/white_clean.theme
-#+HTML_HEAD: <div class="header">
-#+HTML_HEAD:   <a href="../../index.html" class="logo" >خــواطر نــاجي</a>
-#+HTML_HEAD:   <br>
-#+HTML_HEAD:     <a href="../../index.html" class="page_hover">الخواطر</a>
-#+HTML_HEAD:     <a href="../../about.html" class="page_hover">عني</a>
-#+HTML_HEAD: </div>
-
+#+SETUPFILE: ./../../css/post_header.org
 
 * المقدمة
 لاشك أن لوحة مفاتيح الكويرتي في الكتابة هي الاكثر استخداماً في العالم،
