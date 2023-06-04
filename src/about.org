@@ -34,4 +34,9 @@
 دريسدن. وسابقا كنت اعمل في مجال انترنت الاشياء (IOT) ولينكس المدمج
 (Embedded Linux)، من محبين استخدام إيماكس و لغة البرمجة سي.
 
-يمكنك التواصل معي عن طريق البريد الاكتروني:
+يمكنك التواصل معي عن طريق:
+
+البريد الاكتروني:[[mailto:contact@khwaternagy.com][ contact@khwaternagy.com]]
+
+
+[[https://www.linkedin.com/in/nagyation/][لينكدين]] و[[https://github.com/nagyation][جيت هاب]]
