@@ -21,6 +21,8 @@
 #+EMAIL: mnagy1312@gamil.com
 #+SETUPFILE: ./css/white_clean.theme
 #+SETUPFILE: ./css/main_header.org
+#+TITLE: عني
+#+OPTIONS: title:nil
 
 * من انا؟
 أنا مهندس كمبيوتر مهوس بعالم برمجة نظم التشغيل بالأخص لينكس، و مهوس

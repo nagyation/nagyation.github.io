@@ -21,6 +21,8 @@
 #+EMAIL: mnagy1312@gamil.com
 #+SETUPFILE: ./css/white_clean.theme
 #+SETUPFILE: ./css/main_header.org
+#+TITLE: خواطر ناجي
+#+OPTIONS: title:nil
 
 * عن المدونة
 السلام عليكم ورحمة الله وبركاته، مرحبا بكم، خواطر ناجي هي مدونة ساكتب
