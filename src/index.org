@@ -37,4 +37,4 @@
 
 * الخواطر:
 
--  [[file:posts/rehlt-dvorak/rehlt-dvorak.org][رحلتي مع دفورك]]
+- [[file:posts/rehlt-dvorak/rehlt-dvorak.org][رحلتي من الكويرتي الي الدفوراك]]
