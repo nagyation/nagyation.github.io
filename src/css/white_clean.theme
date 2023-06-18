@@ -403,6 +403,12 @@
 #+HTML_HEAD: .footpara {
 #+HTML_HEAD:     display:  inline;
 #+HTML_HEAD: }
+#+HTML_HEAD: .org-src-container {
+#+HTML_HEAD:      direction: ltr;
+#+HTML_HEAD:}
+#+HTML_HEAD: pre.src {
+#+HTML_HEAD:  font-size: 14px;
+#+HTML_HEAD: }
 #+HTML_HEAD:
 #+HTML_HEAD: /* Responsive
 #+HTML_HEAD:    -------------------------------------------------- */
