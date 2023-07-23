@@ -535,6 +535,17 @@ line-height:  1.5;
 .footpara {
 display:  inline;
 }
+.org-src-container {
+direction: ltr;
+}
+pre.src {
+font-size: 14px;
+}
+pre.example {
+font-size: 14px;
+color: blue;
+direction :ltr;
+}
 
 /* Responsive
 -------------------------------------------------- */
@@ -557,11 +568,23 @@ padding:  30px;
 }
 }
 </style>
+<link rel="stylesheet"
+href="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/default.min.css">
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+<script>
+// first, find all the div.code blocks
+document.addEventListener('DOMContentLoaded', (event) => {
+document.querySelectorAll('pre.src').forEach((el) => {
+hljs.highlightElement(el);
+});
+});
+</script>
 <div class="header">
 <a href="../../index.html" class="logo" >خواطر ناجي</a>
 <br>
 <a href="../../index.html" class="page_hover">الخواطر</a>
-<a href="../../about.html" class="page_hover">عني</a>
+<a href="../../about.html" class="page_hover">عن المدونة</a>
+<a href="../../aboutme.html" class="page_hover">عني</a>
 </div>
 </head>
 <body>
@@ -634,7 +657,7 @@ padding:  30px;
 
 
 
-<div id="org4c4431e" class="figure">
+<div id="org5a0a59e" class="figure">
 <p><img src="img/qwerty.png" alt="qwerty.png" style="margin-left: auto; margin-right: auto; width:80%;" />
 </p>
 <p><span class="figure-number">شكل 1: </span>لوحة المفاتيح - كويرتي</p>
@@ -656,7 +679,7 @@ typing)، وهي الكتابة بالاعتماد علي الذاكرة الع�
 </p>
 
 
-<div id="org9dbaf5c" class="figure">
+<div id="org1b27f44" class="figure">
 <p><img src="img/keyboard_touchtyping.png" alt="keyboard_touchtyping.png" style="margin-left: auto; margin-right: auto; width:70%;" />
 </p>
 <p><span class="figure-number">شكل 2: </span>طريقة وضع الأصابع</p>
@@ -682,7 +705,7 @@ typing)، وهي الكتابة بالاعتماد علي الذاكرة الع�
 عليه.
 </p>
 
-<div id="org1d8006d" class="figure">
+<div id="org3cf148b" class="figure">
 <p><img src="img/380px-English-slf2.png" alt="380px-English-slf2.png" style="margin-left: auto; margin-right: auto;" />
 </p>
 <p><span class="figure-number">شكل 3: </span>اكثر الحروف ظهورا في الكلمات الانجليزية <a href="https://en.wikipedia.org/wiki/Letter_frequency">انظر ايضاً</a></p>
@@ -723,7 +746,7 @@ typing)، وهي الكتابة بالاعتماد علي الذاكرة الع�
 
 
 
-<div id="org6055f24" class="figure">
+<div id="orge3ef37a" class="figure">
 <p><img src="img/KB_United_States_Dvorak.svg.png" alt="KB_United_States_Dvorak.svg.png" style="margin-left: auto; margin-right: auto; width:80%;" />
 </p>
 <p><span class="figure-number">شكل 4: </span>لوحة المفاتيح - دفوراك</p>
@@ -752,7 +775,7 @@ typing)، وهي الكتابة بالاعتماد علي الذاكرة الع�
 </p>
 
 
-<div id="org0fc7ab2" class="figure">
+<div id="orgc4ed93d" class="figure">
 <p><img src="img/Screenshot 2023-02-21 at 4.15.28 PM.png" alt="Screenshot 2023-02-21 at 4.15.28 PM.png" style="margin-left: auto; margin-right: auto; width:100%;" />
 </p>
 <p><span class="figure-number">شكل 5: </span>معدل تعلمي مع الوقت</p>
@@ -789,7 +812,7 @@ typing)، وهي الكتابة بالاعتماد علي الذاكرة الع�
 
 
 
-<div id="orgbfda719" class="figure">
+<div id="org0c80aff" class="figure">
 <p><img src="img/2560px-KB_US-Colemak.svg.png" alt="2560px-KB_US-Colemak.svg.png" style="margin-left: auto; margin-right: auto; width:80%;" />
 </p>
 <p><span class="figure-number">شكل 6: </span>لوحة المفاتيح كوليماك</p>
@@ -807,7 +830,7 @@ typing)، وهي الكتابة بالاعتماد علي الذاكرة الع�
 </p>
 
 
-<div id="org036c3cc" class="figure">
+<div id="org4608c94" class="figure">
 <p><img src="img/KB_Arabic_MAC.svg.png" alt="KB_Arabic_MAC.svg.png" style="margin-left: auto; margin-right: auto; width:80%;" />
 </p>
 <p><span class="figure-number">شكل 7: </span>لوحة الماك</p>
@@ -818,7 +841,7 @@ typing)، وهي الكتابة بالاعتماد علي الذاكرة الع�
 </p>
 
 
-<div id="org41cb362" class="figure">
+<div id="org7921671" class="figure">
 <p><img src="img/arabicfreq.png" alt="arabicfreq.png" style="margin-left: auto; margin-right: auto; width:90%;" />
 </p>
 <p><span class="figure-number">شكل 8: </span>تحليل تكرار الحروف العربية. <a href="http://www.intellaren.com/articles/en/a-study-of-arabic-letter-frequency-analysis">المصدر</a></p>
@@ -839,7 +862,7 @@ typing)، وهي الكتابة بالاعتماد علي الذاكرة الع�
 </p>
 
 
-<div id="org3e1a900" class="figure">
+<div id="org1110867" class="figure">
 <p><img src="img/KB_Arabic_Sakhr.svg.png" alt="KB_Arabic_Sakhr.svg.png" style="margin-left: auto; margin-right: auto; width:80%;" />
 </p>
 <p><span class="figure-number">شكل 9: </span>لوحة المفاتيح صخر</p>

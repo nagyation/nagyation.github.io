@@ -334,61 +334,6 @@
 #+HTML_HEAD:     color: #555;
 #+HTML_HEAD:     text-decoration: underline;
 #+HTML_HEAD: }
-;; #+HTML_HEAD: /* table of content */
-;; #+HTML_HEAD: #table-of-contents {
-;; #+HTML_HEAD:     position:  fixed;
-;; #+HTML_HEAD:     background-color:  #fff;
-;; #+HTML_HEAD:     left:  0em;
-;; #+HTML_HEAD:     top:  0em;
-;; #+HTML_HEAD:     border: 1px solid #e1e1e8;
-;; #+HTML_HEAD:     -webkit-box-shadow:  0 0 1em #777777;
-;; #+HTML_HEAD:     -moz-box-shadow:  0 0 1em #777777;
-;; #+HTML_HEAD:     -webkit-border-bottom-left-radius:  5px;
-;; #+HTML_HEAD:     -moz-border-radius-bottomleft:  5px;
-;; #+HTML_HEAD:     text-align:  center;
-;; #+HTML_HEAD:     padding: 0 0 0 1em;
-;; #+HTML_HEAD:     /* ensure doesn't flow off the screen when expanded */
-;; #+HTML_HEAD:     max-height:  80%;
-;; #+HTML_HEAD:     overflow:  auto;
-;; #+HTML_HEAD:     z-index:  200;
-;; #+HTML_HEAD: }
-;; #+HTML_HEAD: 
-;; #+HTML_HEAD: #table-of-contents h2 {
-;; #+HTML_HEAD:     max-width:  20em;
-;; #+HTML_HEAD:     font-weight:  normal;
-;; #+HTML_HEAD:     padding-left:  0.5em;
-;; #+HTML_HEAD:     padding-top:  0.05em;
-;; #+HTML_HEAD:     padding-bottom:  0.05em;
-;; #+HTML_HEAD: }
-;; #+HTML_HEAD: 
-;; #+HTML_HEAD: #table-of-contents ul {
-;; #+HTML_HEAD:     margin-left:  14pt;
-;; #+HTML_HEAD:     margin-bottom:  10pt;
-;; #+HTML_HEAD:     padding:  0;
-;; #+HTML_HEAD:     text-decoration: underline;
-;; #+HTML_HEAD: }
-;; #+HTML_HEAD: 
-;; #+HTML_HEAD: #table-of-contents li {
-;; #+HTML_HEAD:     padding:  0;
-;; #+HTML_HEAD:     margin:  1px;
-;; #+HTML_HEAD:     list-style:  none;
-;; #+HTML_HEAD: }
-;; #+HTML_HEAD: 
-;; #+HTML_HEAD: #table-of-contents ul>: first-child {
-;; #+HTML_HEAD:     color:  blue;
-;; #+HTML_HEAD: }
-;; #+HTML_HEAD: 
-;; #+HTML_HEAD: #table-of-contents #text-table-of-contents {
-;; #+HTML_HEAD:     display:  none;
-;; #+HTML_HEAD:     text-align:  right;
-;; #+HTML_HEAD: }
-;; #+HTML_HEAD: 
-;; #+HTML_HEAD: #table-of-contents: hover #text-table-of-contents {
-;; #+HTML_HEAD:     display:  block;
-;; #+HTML_HEAD:     padding:  0.5em;
-;; #+HTML_HEAD:     margin-top:  -1.5em;
-;; #+HTML_HEAD: }
-;; #+HTML_HEAD: 
 #+HTML_HEAD: /* footer */
 #+HTML_HEAD: .footer {
 #+HTML_HEAD:     margin:  80px 0 0;
@@ -402,6 +347,17 @@
 #+HTML_HEAD: }
 #+HTML_HEAD: .footpara {
 #+HTML_HEAD:     display:  inline;
+#+HTML_HEAD: }
+#+HTML_HEAD: .org-src-container {
+#+HTML_HEAD:      direction: ltr;
+#+HTML_HEAD:}
+#+HTML_HEAD: pre.src {
+#+HTML_HEAD:  font-size: 14px;
+#+HTML_HEAD: }
+#+HTML_HEAD: pre.example {
+#+HTML_HEAD:  font-size: 14px;
+#+HTML_HEAD:  color: blue;
+#+HTML_HEAD:  direction :ltr;
 #+HTML_HEAD: }
 #+HTML_HEAD:
 #+HTML_HEAD: /* Responsive
@@ -426,17 +382,14 @@
 #+HTML_HEAD: }
 #+HTML_HEAD:  </style>
 
-;; #+HTML_HEAD:<script type="text/javascript">
-;; #+HTML_HEAD:  document.addEventListener('DOMContentLoaded',function() {
-;; #+HTML_HEAD:      document.getElementById("table-of-contents").onclick = function() {
-;; #+HTML_HEAD:          var elem = document.getElementById("text-table-of-contents");
-;; #+HTML_HEAD:          elem.style.display = elem.style.display == "block" ? "none" : "block";
-;; #+HTML_HEAD:      }
-;; #+HTML_HEAD:  });
-;; #+HTML_HEAD:
-;; #+HTML_HEAD:  var url = document.location.href;
-;; #+HTML_HEAD:  var orgsource = url.substring(0, url.lastIndexOf("."))+".org.html";
-;; #+HTML_HEAD:  function show_org_source(){
-;; #+HTML_HEAD:      document.location.href = orgsource;
-;; #+HTML_HEAD:  }
-;; #+HTML_HEAD:</script>
+#+HTML_HEAD: <link rel="stylesheet"
+#+HTML_HEAD: href="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/default.min.css">
+#+HTML_HEAD: <script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+#+HTML_HEAD: <script>
+#+HTML_HEAD: // first, find all the div.code blocks
+#+HTML_HEAD: document.addEventListener('DOMContentLoaded', (event) => {
+#+HTML_HEAD:   document.querySelectorAll('pre.src').forEach((el) => {
+#+HTML_HEAD:     hljs.highlightElement(el);
+#+HTML_HEAD:   });
+#+HTML_HEAD: });
+#+HTML_HEAD: </script>
