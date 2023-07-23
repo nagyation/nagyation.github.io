@@ -3,6 +3,7 @@
 #+options: html5-fancy:nil tex:t
 #+options: num:0
 #+options: timestamp:nil
+#+options: ^:{}
 #+html_doctype: xhtml-strict
 #+html_container: div
 #+html_content_class: content
@@ -25,90 +26,427 @@
 #+SETUPFILE: ./../../css/white_clean.theme
 #+SETUPFILE: ./../../css/post_header.org
 
+
 * المقدمة
 البرمجة كائنية التوجه (OOP) هي نوع برمجة مستخدم بشدة في كل لغات
-البرمجة الحديثة، و لكن كما هو معروف السي لغة قائمة على البرمجة
-الوظيفية (Functional programming)، و في هذا الخاطر سوف اتحدث عن كيفية
-استخدام البرمجة كائنية التوجه في السي وسنذكر تشبيهات من ترميز النواة
-لينيكس (Linux kernel code).
+البرمجة الحديثة، ولكن كما هو معروف السي لغة قائمة على البرمجة الوظيفية
+(Functional programming)، واحيانا تطبيق بعض أفكار البرمجة الكائنية في
+السي يحسن كثيرا فاعلية الكود وهيئته، ونرى ذلك في كود لينكس (Linux
+Kernel)، فستجد استخدامات كثيرة للبرمجة الكائنية فيه، وفي هذا الخاطر
+سوف أتحدث عن كيفية استخدام البرمجة كائنية التوجه في السي وسنوضح أمثلة
+عليها.
 
 * البرمجة كائنية التوجه
-سأعتمد أن القارئ يعرف البرمجة كائنية التوجه (OOP)، ولكن قبل ان أبدأ
-سوف اتحدث عن جزئين مهمين فيها:
+سأعتمد أن القارئ يعرف البرمجة كائنية التوجه (OOP)، ولكن قبل أن أبدأ
+سوف أتحدث عن جزئين مهمين فيها:
  - الوراثة (Inheritance)
 
-   كما تعلم يا صديقي ان الوراثة في البرمجة الكائنية هي تريقة جيدة جدا
-   في وضع الصفات والطرق بطريقة طبقية منطقية، بحيث ان كل كائن يرث من
+   كما تعلم يا صديقي أن الوراثة في البرمجة الكائنية هي طريقة جيدة جدا
+   في وضع الصفات والطرق بطريقة طبقية منطقية، بحيث جعل كل كائن يرث من
    الذي قبله الطرق والصفات، والمثال الاشهر على التوريث هي انشاء فصيلة
    (Class) الثدييات وتكون فيها طرق (Methods) مثل يلد ويأكل مثلا،
-   ويسطيع وراثت ذلك فصيلتان اخريان مثل الحوت والقرد، لانهما فيهم نفس
-   الصفات الأولية -كلاهم ياكلون و يلدون- ومن هنا نرتب البرنامج في شكل
-   متدرج منطقي، و قد يبني على ذلك مثلا تفصيل اكثر مثل قصائل الحوت
-   الابيض و الازرق التي تستطيع ان ترث من فصيلة الحوت.
+   ويستطيع وراثت ذلك فصيلتان اخريان مثل الحوت والقرد، لانهما فيهم نفس
+   الصفات الأولية -كلاهم ياكلون ويلدون- ومن هنا نرتب البرنامج في شكل
+   متدرج منطقي، وقد يبني على ذلك مثلا تفصيل اكثر مثل فصائل الحوت
+   الابيض والازرق التي تستطيع أن ترث من فصيلة الحوت.
 
  - تعددية الاشكال (Polymorphism)
 
    تعددية الاشكال تستخدم فكرة الوراثة في جعل الكائن الواحد يستطيع ان
    يعامل بكونه انواع اخري، وهذا نستطيع فهمة جيدا من المثال اللي ذكرناه
-   في الوراثة، فمثلا نسطيع ان نعامل الحوت الزرق و الحوت الابيض علي
-   انهم فصيلت الحوت، و ايضا ممكن ان نتعامل معهم على انهم فصيلة
-   الثدييات، ومن هنا تجد ان نفس الكائن نستطيع التعامل معه بأكثر من شكل
-   و صفة، والمثير ايضا في هذا المفهوم أن الحوت الازرق والشامبنزي
-   نستطيع ان نعاملهم معالمة فصيلة الثدييات بدون أن نجد مشكلة في
+   في الوراثة، فمثلا نسطيع أن نعامل الحوت الزرق والحوت الابيض علي
+   انهم فصيلت الحوت، وايضا ممكن أن نتعامل معهم على انهم فصيلة
+   الثدييات، ومن هنا تجد أن نفس الكائن نستطيع التعامل معه بأكثر من شكل
+   وصفة، والمثير ايضا في هذا المفهوم أن الحوت الازرق والشمبانزي
+   نستطيع أن نعاملهم معالمة فصيلة الثدييات بدون أن نجد مشكلة في
    اختلافهم.
 
-* السي و البرمجة الكائنية
+* السي والبرمجة الكائنية
 
-السي كما نعرف تستخدم البرمجة الوظيفية، وتعتمد علي مستخدم الدالة في أن
-يحتفظ بمعلموت المستخدمة مع الدالة، و هذا على عكس مفهوم التغليف
-(Encapsulation) الذي يجمع المعلومات او الصفات مع الطرق في شكل واحدة
-وتسطيع التعامل معهم جميعا عن طريق الكائن.  و هذا المفهوم نسطيع ان نقوم
-به في السي عن طريق الهيكل (Struct) فمثلا دعنا نصنع هيكل لمضلع في هيئة
+السي كما نعرف تستخدم البرمجة الوظيفية، وتعتمد علي مستخدم الدالة في
+الاحتفاظ بالبينات المستخدمة مع الدالة، وهذا على عكس مفهوم التغليف
+(Encapsulation) الذي يجمع المعلومات او الصفات مع الطرق في كائن واحد
+وتسطيع التعامل معهم جميعا عن طريق الكائن.  وهذا المفهوم نسطيع تطبيقه
+في السي عن طريق الهيكل (Struct) فمثلا دعنا نصنع هيكل لمضلع في هيئة
 فصيلة.
 
-#+BEGIN_SRC C
+#+NAME: polygon_define
+#+BEGIN_SRC C :main no
   typedef struct polygon polygon_t;
   struct polygon {
         int nsides;                       /* عدد الضلوع */
-        int (*cal_permiter)(polygon_t *); /* دالة لحساب المحيط */
-        int (*cal_area)(polygon_t *);     /* دالة لحساب المساحة  */
+        int (*cal_permiter)(polygon_t *); /* مؤشر لدالة لحساب المحيط */
+        int (*cal_area)(polygon_t *);     /* مؤشر لدالة لحساب المساحة  */
   };
 #+END_SRC
 
 
-نستطيع ان نعتبر الهيكل Polygon كفصيلة مجردة (Abstract Class)، ومن هنا
-نسطيع ان نقوم بصنع فصيلة ترثها مثل المربع و المستطيل. ولنقوم بذلك
-يمكننا ان نصنع هيكلين اخريين ونجعل الهيكل Polygon احد اعضاء الهيكل.
+لاحظ استخدام مؤشرات الدوال سنستخدمهم لاحقا، ولكن لاحظ استخدام
+~polygon_t~ كوسيط (Parameter)، وهذا يطابق ~self~ في البرمجة الكائنية في
+البايثون واستخدام ~this~ في بعض اللغات الكائنية، فستساعدنا لمعرفة
+الكائن المطلوب استخدامه.
 
-#+BEGIN_SRC C
+نستطيع أن نعتبر الهيكل Polygon كفصيلة مجردة (Abstract Class)، ومن هنا
+نسطيع أن نقوم بصنع فصيلة ترثها مثل المربع والمستطيل. ولنقوم بذلك
+يمكننا أن نصنع هيكلين اخريين ونجعل الهيكل Polygon احد اعضاء الهيكل.
+
+#+NAME: square_define
+#+BEGIN_SRC C :main no :noweb strip-export
   typedef struct square square_t;
-
   struct square {
-      polygon_t polygon;          /* يرث هيكل الضلع */
+      polygon_t polygon;          /* يرث هيكل المضلع */
       int length;                 /* طول المربع */
   };
-
 #+END_SRC
 
-#+BEGIN_SRC C
+#+NAME: rect_define
+#+BEGIN_SRC C :noweb strip-export :main no
+  <<polygon_define>>
   typedef struct rectangle rectangle_t;
-
   struct rectangle {
-      polygon_t polygon;          /* يرث هيكل الضلع */
+      polygon_t polygon;          /* يرث هيكل المضلع */
       int length;                 /* طول المستطيل */
       int width;                 /* عرض المستطيل*/
   };
+#+END_SRC
 
+#+RESULTS: rect_define
+
+#+NAME: triangle_define
+#+BEGIN_SRC C :main no :noweb strip-export :exports none
+  typedef struct triangle triangle_t;
+  struct triangle {
+      polygon_t polygon;          /* يرث هيكل المضلع */
+      int a,b,c;                 /* اضلع المثلث */
+      int height;                /* الارتفاع علي قاعدة ب */
+  };
 #+END_SRC
 
 
-والان نستطيع ان نعتبر هذة وراثة، بحيث ان كل فصيلة جديدة إن ارادت وراثة
-هيكل المضلع يمكنها فقط وضعه في الهيكل داخلها، و عندما نريد ان نعامل
+والان نستطيع أن نعتبر هذه وراثة، بحيث أن كل فصيلة جديدة إن ارادت وراثة
+هيكل المضلع يمكنها فقط وضعه في الهيكل داخلها، وعندما نريد أن نعامل
 المستطيل كمضلع نتعامل مع جزء المضلع الذي بداخله.
 
 * كيف نتعامل مع الهيكل ككائن؟
 
 ولآن لقد انشئنا هيكل يحاكي مفهوم الوراثة، ولكن حتى الان لانملك كائن او
-شكل يشبه البرمجة الكائنية.  لكي نصنع كائن يمكننا ان نصنع دالة بناء
-(Constructor)، لصنع ذلك لها وجهين وجه باستخدام الحجز الثابت (Static
-Allocation) واخر باستخدام الحجز المتحرك (Dynamic allocation).
+شكل يشبه البرمجة الكائنية.  لكي نصنع كائن يمكننا أن نصنع دالة بناء
+(Constructor)، لصنع ذلك لها وجهين: وجه باستخدام الحجز الثابت (Static
+Allocation)، واخر باستخدام الحجز المتحرك (Dynamic allocation).  الفكرة
+من دالة البناء هي استخدامها لنضع قيم مبدئية في متغيرات الهيكل، مثل
+مؤشرات الدوال التي توجد في هيكل المضلع ~cal_area ,cal_permiter~, والتي
+يجب أن نجعلهم يشيرون الي دوال معينة كي نستطيع أن نستخدمهم لاحقا، بحيث
+نحاكي فكرة التغليف.
+
+#+NAME: rect_imp
+#+BEGIN_SRC C :includes <stdlib.h> :noweb strip-export :main no
+  <<rect_define>>
+  int rect_cal_area(polygon_t *poly)
+  {
+      rectangle_t *rect = (rectangle_t *) poly; /* هنا نستخدم فكرة تعدد الاشكال */
+      return rect->length * rect->width;
+  }
+
+  int rect_cal_permiter(polygon_t *poly)
+  {
+      rectangle_t *rect = (rectangle_t *) poly; /* هنا نستخدم فكرة تعدد الاشكال */
+      return 2 * (rect->length + rect->width);
+  }
+
+  void rect_init_static(rectangle_t *rect, int length, int width)
+  {
+      rect->length = length;
+      rect->width = width;
+      rect->polygon.cal_permiter = rect_cal_permiter;
+      rect->polygon.cal_area = rect_cal_area;
+  }
+
+  rectangle_t * rect_init(int length, int width)
+  {
+      rectangle_t *rect = malloc(sizeof(rectangle_t));
+      if (!rect)
+          return NULL;
+      rect->length = length;
+      rect->width = width;
+      rect->polygon.cal_permiter = rect_cal_permiter;
+      rect->polygon.cal_area = rect_cal_area;
+      return rect;
+  }
+#+END_SRC
+
+#+RESULTS: rect_imp
+
+في هذا الكود عرفنا دوال للمستطيل، ومنها الدوال لحسابة المحيط والمساحة،
+وتري في الكود أعلاه أننا استخدمنا التحويل (casting) لنحول من نوع
+~polygon_t~ الي ~rectangle_t~, واستطعنا أن نفعل ذلك لاننا نعرف أن من
+يستخدم هذه الدوال من نوع ~rectangle_t~, وايضا لاننا وضعنا ال ~polygon~ في
+هيكل ال ~rectangle_t~ في المقدمة، والسي تأكد أن اول عضو في الهيكل دائما
+يكون نفس عنوان الهيكل، وإحتجنا التحويل للتعامل مع المتغيرات في هيكل
+المستطيل، وسيوضح كل شئ عندما نستخدمه الان.
+
+
+#+BEGIN_SRC C :includes <stdio.h> <stdlib.h> :noweb strip-export :exports both :results output
+  <<rect_imp>>
+  int main()
+  {
+
+      rectangle_t *rect1, rect2;
+      polygon_t *poly1, *poly2;
+      int area1, area2, prem1, prem2;
+
+      rect1 = rect_init(5, 10); /* نستخدم الحجز المتحرك */
+      rect_init_static(&rect2, 3, 10); /* نستخدم الحجز الثابت */
+
+      poly1 = &rect1->polygon;    /* نستطيع ايضا أن نكتبها: poly1 = rect1 */
+      poly2 = &rect2.polygon;     /* نستطيع ايضا أن نكتبها: poly2 = &rect2 */
+      /* نحتاج إرسال نفس الهيكل كوسيط للدالة لكي تصل لصفات الكائن */
+      area1 = poly1->cal_area(poly1);
+      prem1 = poly1->cal_permiter(poly1);
+      area2 = poly2->cal_area(poly2);
+      prem2 = poly2->cal_permiter(poly2);
+
+      printf("rect1: area:%d  prem:%d\n", area1, prem1);
+      printf("rect2: area:%d  prem:%d\n", area2, prem2);
+  }
+#+END_SRC
+
+#+RESULTS:
+: rect1: area:50  prem:30
+: rect2: area:30  prem:26
+
+
+ومن الكود اعلاه نرى استخدام تعددية الاشكال، فاستطعنا أن نستخدم مؤشر من
+نوع المضلع مع المستطيل، يمكننا ايضا أن نفعل الامر ذاته مع المربع، و
+بهذا نستطيع استخدام نفس مؤشر المضلع لنشير الى مربع او مستطيل!
+
+في حالة الحجز المتحرك سنحتاج أن نحرر الحجز، ولفعل ذلك نحتاج أن نكتب
+دالة هدم (Deconstructer)، وفيها نستخدم دالة ~free~
+
+* التحويل الى اسفل (Downcasting)
+لقد رأينا نوعين من التحويل، من المستطيل الي المضلع وهذا تحويل الي
+اعلي، من الوارث الي الموروث، وهذا سهل لاننا نسطيع أن نستخدم العضو
+~polygon~ الذي في الهيكل لفعل ذلك.
+
+أما التحويل إلى اسفل يحتاج الي الحيلة، استطعنا فعلها بسهولة مسبقا لانه
+كان اول عضو في الهيكل، وأول عضو كما ذكرنا يملك نفس عنوان الهيكل كما
+فعلنا في الدالتان ~rect_cal_area~ و ~rect_cal_permiter~, ولكن ماذا لو كان
+العضو الثاني في الهيكل؟ الاجابة هي ~offsetof~, وهو مختصر (macro) معرف في
+*stddef.h* يساعدك في حساب مكان العضو في الذاكرة بالنسبة الى الهيكل، ولكي
+يحسب ذلك يحتاج الى وسيطين: اسم الهيكل، واسم العضو الذي تريد حساب
+موقعه.
+
+#+NAME: test_declare
+#+BEGIN_SRC C :main no :exports none :noweb no
+  struct test {
+      int a;
+      int b;
+  };
+
+#+END_SRC
+
+#+BEGIN_SRC C :includes <stdio.h> <stddef.h> :exports both :results output :noweb yes
+  <<test_declare>>
+  printf("offsetof(a) = %d\n", offsetof(struct test, a));
+  printf("offsetof(b) = %d\n", offsetof(struct test, b));
+  printf("ofssetof(b) - offsetof(a) = %d\n", offsetof(struct test, b) - offsetof(struct test, a));
+#+END_SRC
+
+#+RESULTS:
+: offsetof(a) = 0
+: offsetof(b) = 4
+: ofssetof(b) - offsetof(a) = 4
+
+كما نرى من المثال أن ~b~ تبعد عن ~a~ -و ايضاً من البداية- ٤ بايت، ويمكننا
+استخدام تلك العملية للتحويل من مؤشر يشير إلي ~b~ إلي مؤشر يشير إلي
+الهيكل كله..
+
+#+NAME: test_define
+#+BEGIN_SRC C :main no :exports none :noweb strip-export
+  <<test_declare>>
+  struct test test = {
+      .a = 1995,
+      .b = 1312
+  };
+#+END_SRC
+
+#+RESULTS: test_define
+
+#+BEGIN_SRC  C :includes <stdio.h> <stddef.h> <stdlib.h> :exports both :results output :noweb yes
+    <<test_define>>
+    int *pb = &test.b;               /* وضع مؤشر علي b */
+    struct test *ptest;
+    ptest = (struct test*) ((char *)pb - offsetof(struct test, b));
+    printf("a: %d\nb: %d\n", ptest->a, ptest->b);
+ #+END_SRC
+
+ #+RESULTS:
+ : a: 1995
+ : b: 1312
+
+ لنحلل هذا السطر اكثر:
+
+#+BEGIN_SRC C
+  ptest = (struct test*) ((char *)pb - offsetof(struct test, b));
+#+END_SRC
+
+اولا نحسب موقع ~b~ من الهيكل عن طريق ~offsetof~, وكما نعرف انها ٤ بايتس، و
+ الآن لكي نحول مؤشر ~pb~ إلي مؤشر ~struct test~, يجب علينا طرح من المؤشر
+ pb ٤ بايتس لكي نشير الي اول الهيكل، واحتجنا أن نحول pb الى مؤشر من
+ نوع ~char~ لكي نطرح ٤ بايتس فقط، كما نعرف أن الجمع والطرح مع المؤشرات
+ تستخدم نوع المؤشر، فجمع ٤ على مؤشر من نوع ~int~ لن يكون ٤ بايتس بل ١٦
+ بايتس في حالة أن حجم int ٤ بايتس، ونحن هنا نريد فقط أن نطرح ٤ بايتس
+ ولذلك احتجنا للتحويل لنوع يستخدم واحد بايت.  وبهذا استطعنا أن نحول
+ الي اسفل. يمكننا ايضا كتابت هذه العملية في شكل مختصر كالتالي.
+
+#+BEGIN_SRC  C :includes <stdio.h> <stddef.h> <stdlib.h> :exports both :results output :noweb strip-export
+  <<test_define>>
+  #define child_of(ptr, type, member) (type *) ((char *)ptr - offsetof(type, member))
+
+  int *pb = &test.b;               /* وضع مؤشر علي b */
+  struct test *ptest;
+  ptest = child_of(pb, struct test, b);
+  printf("a: %d\nb: %d\n", ptest->a, ptest->b);
+
+#+END_SRC
+
+#+RESULTS:
+: a: 1995
+: b: 1312
+
+ايضا يمكنك البحث عن تعريف مختصر *container_of* في كود لينكس، معرف بشكل
+اعمق قليلا من child_of التي ذكرناها في المثال، ولذلك انصح بالبحث عنه
+ايضا.
+
+* مثال اضافي
+دعنا نكتب مثال يظهر المسألة اكثر، يمكننا أن نصنع مصفوفة من مؤشرات الي
+polygon، ويمكننا أن ننشئ اكثر من نوع مثل مستطيل ومربع ومثلث مثلا،
+و ننشى دالة تمشي على هذه المصفوفة وتطبع المساحة لهم جميعا.
+
+#+NAME: square_imp
+#+BEGIN_SRC C :includes <stdlib.h> :noweb strip-export :main no :exports none
+  <<square_define>>
+  int square_cal_area(polygon_t *poly)
+  {
+      square_t *square = (square_t *) poly; /* هنا نستخدم فكرة تعدد الاشكال */
+      return square->length * square->length;
+  }
+
+  int square_cal_permiter(polygon_t *poly)
+  {
+      square_t *square = (square_t *) poly; /* هنا نستخدم فكرة تعدد الاشكال */
+      return 4 * square->length;
+  }
+
+  void square_init_static(square_t *square, int length)
+  {
+      square->length = length;
+      square->polygon.cal_permiter = square_cal_permiter;
+      square->polygon.cal_area = square_cal_area;
+  }
+
+  square_t * square_init(int length)
+  {
+      square_t *square = malloc(sizeof(square_t));
+      if (!square)
+          return NULL;
+      square->length = length;
+      square->polygon.cal_permiter = square_cal_permiter;
+      square->polygon.cal_area = square_cal_area;
+      return square;
+  }
+#+END_SRC
+
+
+#+NAME: triangle_imp
+#+BEGIN_SRC C :includes <stdlib.h> :noweb strip-export :main no :exports none
+  <<triangle_define>>
+  int triangle_cal_area(polygon_t *poly)
+  {
+      triangle_t *triangle = (triangle_t *) poly; /* هنا نستخدم فكرة تعدد الاشكال */
+      return triangle->height * triangle->b / 2;
+  }
+
+  int triangle_cal_permiter(polygon_t *poly)
+  {
+      triangle_t *triangle = (triangle_t *) poly; /* هنا نستخدم فكرة تعدد الاشكال */
+      return triangle->a + triangle->b + triangle->c;
+  }
+
+  void triangle_init_static(triangle_t *triangle, int a, int b, int c, int h)
+  {
+      triangle->a = a;
+      triangle->b = b;
+      triangle->c = c;
+      triangle->height = h;
+      triangle->polygon.cal_permiter = triangle_cal_permiter;
+      triangle->polygon.cal_area = triangle_cal_area;
+  }
+
+  triangle_t * triangle_init(int a, int b, int c, int h)
+  {
+      triangle_t *triangle = malloc(sizeof(triangle_t));
+      if (!triangle)
+          return NULL;
+      triangle->a = a;
+      triangle->b = b;
+      triangle->c = c;
+      triangle->height = h;
+      triangle->polygon.cal_permiter = triangle_cal_permiter;
+      triangle->polygon.cal_area = triangle_cal_area;
+      return triangle;
+  }
+#+END_SRC
+
+#+RESULTS: triangle_imp
+
+#+BEGIN_SRC C :includes <stdio.h> <stdlib.h> :noweb strip-export :exports both :results output
+  <<rect_imp>>
+  <<triangle_imp>>
+  <<square_imp>>
+  void print_polygons(polygon_t *polgs[], int n)
+  {
+      int i;
+      for (i = 0; i < n; i++) {
+          int prem, area;
+          prem = polgs[i]->cal_permiter(polgs[i]);
+          area = polgs[i]->cal_area(polgs[i]);
+          printf("polygon num %d: area=%d, perm=%d\n", i, area, prem);
+      }
+  }
+
+  int main()
+  {
+
+      rectangle_t *rect;
+      square_t *square;
+      triangle_t *triangle;
+      polygon_t *polygons[3];
+
+      rect = rect_init(5, 10); /* نستخدم الحجز المتحرك */
+      triangle = triangle_init(2, 10, 3, 2); /* نستخدم الحجز المتحرك */
+      square = square_init(5); /* نستخدم الحجز المتحرك */
+      /* والآن لنضعهم في مصفوفة من نوع المضلع */
+      polygons[0] = &rect->polygon;
+      polygons[1] = &square->polygon;
+      polygons[2] = &triangle->polygon;
+
+      print_polygons(polygons, 3);
+  }
+#+END_SRC
+
+#+RESULTS:
+: polygon num 0: area=50, perm=30
+: polygon num 1: area=25, perm=20
+: polygon pnum 2: area=10, perm=15
+
+كما نرى من المثال اننا استطعنا نبني دالة تمشي على مصفوفة من نوع المضلع،
+وبهذا استطعنا أن نتعامل مع كل انواع المضلعات بنفس الدوال وبنفس
+الطريقة، بدون التعامل معهم كحالات خاصة، وهذا يوضح قوة تعدد الاشكال.
+
+* الملخص
+تعلمنا في هذا الخاطر كيف نستخدم البرمجة الكائنية في السي، واستطعنا ان
+نستخدم خصائصها ايضا مثل الوراثة وتعدد الاشكال، واسبتنا فاعلية
+استخدامهم، وتكلمنا ايضا عن offsetof وكيف نستطيع أن نستخدمها للتحويل
+إلي اسفل من موروث الى الوارث (أي من المضلع إلي المربع مثلا).  ويمكنك
+البحث في كود لينكس وستجد أمثلة كثيرة لتطبيق ما ذكرناه، مثل استخدام
+container_of، مع الكثير من برامج التعريف (Device Drivers).

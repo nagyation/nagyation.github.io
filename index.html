@@ -534,6 +534,17 @@ line-height:  1.5;
 .footpara {
 display:  inline;
 }
+.org-src-container {
+direction: ltr;
+}
+pre.src {
+font-size: 14px;
+}
+pre.example {
+font-size: 14px;
+color: blue;
+direction :ltr;
+}
 
 /* Responsive
 -------------------------------------------------- */
@@ -556,41 +567,60 @@ padding:  30px;
 }
 }
 </style>
+<link rel="stylesheet"
+href="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/default.min.css">
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+<script>
+// first, find all the div.code blocks
+document.addEventListener('DOMContentLoaded', (event) => {
+document.querySelectorAll('pre.src').forEach((el) => {
+hljs.highlightElement(el);
+});
+});
+</script>
 <div class="header">
 <a href="index.html" class="logo" >خواطر ناجي</a>
 <br>
 <a href="index.html" class="page_hover">الخواطر</a>
-<a href="about.html" class="page_hover">عني</a>
+<a href="about.html" class="page_hover">عن المدونة</a>
+<a href="aboutme.html" class="page_hover">عني</a>
 </div>
+<style type="text/css">p {
+color: #888;
+font-size:  15px;
+margin:  0 0 10px;
+}
+</style>
 </head>
 <body>
 <div id="content" class="content">
 
-<div id="outline-container-org9879417" class="outline-2">
-<h2 id="org9879417">عن المدونة</h2>
-<div class="outline-text-2" id="text-org9879417">
-<p>
-السلام عليكم ورحمة الله وبركاته، مرحبا بكم، خواطر ناجي هي مدونة ساكتب
-فيها خواطري و افكاري و ما تعلمت في مختلف المجالات باللغة العربية
-الفصحة، المدونة عبارة عن صفحات <b>HTML</b> ثابتة كتبت عن طريق <b>Emacs</b> و نشرت عن
-طريق <b>Github Pages،</b> لا يوجد من يتبعك هنا من مواقع او الاعلانات، انت هنا
-بامان قليلا&#x2026;
-</p>
-
-<p>
-انا لست هنا لاتحدث عن موضوع بعينه، بل سأكتب عن كثير من الاشياء اللتي
-اراها مفيدة و شيقة إن كانت في مجال الحاسبات أو غيره، ارجوا أن يوفقني
-الله و تجد ما يفيدك في الخواطر.
-</p>
-</div>
-</div>
-
 <div id="outline-container-org1034e53" class="outline-2">
 <h2 id="org1034e53">الخواطر:</h2>
 <div class="outline-text-2" id="text-org1034e53">
-<ul class="org-ul">
-<li><a href="posts/rehlt-dvorak/rehlt-dvorak.html">رحلتي من الكويرتي الي الدفوراك</a></li>
-</ul>
+</div>
+<div id="outline-container-orgca53277" class="outline-3">
+<h3 id="orgca53277"><a href="posts/rehlt-dvorak/rehlt-dvorak.html">رحلتي من الكويرتي الي الدفوراك</a></h3>
+<div class="outline-text-3" id="text-orgca53277">
+<p>
+لاشك أن لوحة مفاتيح الكويرتي في الكتابة هي الاكثر استخداماً في العالم،
+وهي الاشهر، وقد يتخيلها معظم الناس انها لوحة المفاتيح الانجليزية
+الوحيدة لشهرتها، ولكن العجيب في ذلك انها ليست أفضل لوحة مفاتيح، لا في
+السرعة، ولا في توزيع الأزرار&#x2026;
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf5b2276" class="outline-3">
+<h3 id="orgf5b2276"><a href="posts/c-use-class/c-use-class.html">استخدام البرمجة كائنية التوجه مع السي</a></h3>
+<div class="outline-text-3" id="text-orgf5b2276">
+<p>
+البرمجة كائنية التوجه (OOP) هي نوع برمجة مستخدم بشدة في كل لغات
+البرمجة الحديثة، ولكن كما هو معروف السي لغة قائمة على البرمجة الوظيفية
+(Functional programming)، واحيانا تطبيق بعض أفكار البرمجة الكائنية في
+السي يحسن كثيرا فاعلية الكود وهيئته، ونرى ذلك في كود لينكس&#x2026;
+</p>
+</div>
 </div>
 </div>
 </div>

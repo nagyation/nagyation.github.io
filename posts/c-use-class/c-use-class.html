@@ -541,6 +541,11 @@ direction: ltr;
 pre.src {
 font-size: 14px;
 }
+pre.example {
+font-size: 14px;
+color: blue;
+direction :ltr;
+}
 
 /* Responsive
 -------------------------------------------------- */
@@ -563,11 +568,23 @@ padding:  30px;
 }
 }
 </style>
+<link rel="stylesheet"
+href="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/default.min.css">
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
+<script>
+// first, find all the div.code blocks
+document.addEventListener('DOMContentLoaded', (event) => {
+document.querySelectorAll('pre.src').forEach((el) => {
+hljs.highlightElement(el);
+});
+});
+</script>
 <div class="header">
 <a href="../../index.html" class="logo" >خواطر ناجي</a>
 <br>
 <a href="../../index.html" class="page_hover">الخواطر</a>
-<a href="../../about.html" class="page_hover">عني</a>
+<a href="../../about.html" class="page_hover">عن المدونة</a>
+<a href="../../aboutme.html" class="page_hover">عني</a>
 </div>
 </head>
 <body>
@@ -582,21 +599,27 @@ padding:  30px;
 <ul>
 <li><a href="#orgd73860b">المقدمة</a></li>
 <li><a href="#org12f21ea">البرمجة كائنية التوجه</a></li>
-<li><a href="#org94062a1">السي و البرمجة الكائنية</a></li>
+<li><a href="#org1fa6efe">السي والبرمجة الكائنية</a></li>
 <li><a href="#org31aada3">كيف نتعامل مع الهيكل ككائن؟</a></li>
+<li><a href="#orge3b3f39">التحويل الى اسفل (Downcasting)</a></li>
+<li><a href="#orgde61966">مثال اضافي</a></li>
+<li><a href="#org7e12ac3">الملخص</a></li>
 </ul>
 </div>
 </div>
+
 
 <div id="outline-container-orgd73860b" class="outline-2">
 <h2 id="orgd73860b">المقدمة</h2>
 <div class="outline-text-2" id="text-orgd73860b">
 <p>
 البرمجة كائنية التوجه (OOP) هي نوع برمجة مستخدم بشدة في كل لغات
-البرمجة الحديثة، و لكن كما هو معروف السي لغة قائمة على البرمجة
-الوظيفية (Functional programming)، و في هذا الخاطر سوف اتحدث عن كيفية
-استخدام البرمجة كائنية التوجه في السي وسنذكر تشبيهات من ترميز النواة
-لينيكس (Linux kernel code).
+البرمجة الحديثة، ولكن كما هو معروف السي لغة قائمة على البرمجة الوظيفية
+(Functional programming)، واحيانا تطبيق بعض أفكار البرمجة الكائنية في
+السي يحسن كثيرا فاعلية الكود وهيئته، ونرى ذلك في كود لينكس (Linux
+Kernel)، فستجد استخدامات كثيرة للبرمجة الكائنية فيه، وفي هذا الخاطر
+سوف أتحدث عن كيفية استخدام البرمجة كائنية التوجه في السي وسنوضح أمثلة
+عليها.
 </p>
 </div>
 </div>
@@ -605,8 +628,8 @@ padding:  30px;
 <h2 id="org12f21ea">البرمجة كائنية التوجه</h2>
 <div class="outline-text-2" id="text-org12f21ea">
 <p>
-سأعتمد أن القارئ يعرف البرمجة كائنية التوجه (OOP)، ولكن قبل ان أبدأ
-سوف اتحدث عن جزئين مهمين فيها:
+سأعتمد أن القارئ يعرف البرمجة كائنية التوجه (OOP)، ولكن قبل أن أبدأ
+سوف أتحدث عن جزئين مهمين فيها:
 </p>
 <ul class="org-ul">
 <li><p>
@@ -614,14 +637,14 @@ padding:  30px;
 </p>
 
 <p>
-كما تعلم يا صديقي ان الوراثة في البرمجة الكائنية هي تريقة جيدة جدا
-في وضع الصفات والطرق بطريقة طبقية منطقية، بحيث ان كل كائن يرث من
+كما تعلم يا صديقي أن الوراثة في البرمجة الكائنية هي طريقة جيدة جدا
+في وضع الصفات والطرق بطريقة طبقية منطقية، بحيث جعل كل كائن يرث من
 الذي قبله الطرق والصفات، والمثال الاشهر على التوريث هي انشاء فصيلة
 (Class) الثدييات وتكون فيها طرق (Methods) مثل يلد ويأكل مثلا،
-ويسطيع وراثت ذلك فصيلتان اخريان مثل الحوت والقرد، لانهما فيهم نفس
-الصفات الأولية -كلاهم ياكلون و يلدون- ومن هنا نرتب البرنامج في شكل
-متدرج منطقي، و قد يبني على ذلك مثلا تفصيل اكثر مثل قصائل الحوت
-الابيض و الازرق التي تستطيع ان ترث من فصيلة الحوت.
+ويستطيع وراثت ذلك فصيلتان اخريان مثل الحوت والقرد، لانهما فيهم نفس
+الصفات الأولية -كلاهم ياكلون ويلدون- ومن هنا نرتب البرنامج في شكل
+متدرج منطقي، وقد يبني على ذلك مثلا تفصيل اكثر مثل فصائل الحوت
+الابيض والازرق التي تستطيع أن ترث من فصيلة الحوت.
 </p></li>
 
 <li><p>
@@ -631,73 +654,76 @@ padding:  30px;
 <p>
 تعددية الاشكال تستخدم فكرة الوراثة في جعل الكائن الواحد يستطيع ان
 يعامل بكونه انواع اخري، وهذا نستطيع فهمة جيدا من المثال اللي ذكرناه
-في الوراثة، فمثلا نسطيع ان نعامل الحوت الزرق و الحوت الابيض علي
-انهم فصيلت الحوت، و ايضا ممكن ان نتعامل معهم على انهم فصيلة
-الثدييات، ومن هنا تجد ان نفس الكائن نستطيع التعامل معه بأكثر من شكل
-و صفة، والمثير ايضا في هذا المفهوم أن الحوت الازرق والشامبنزي
-نستطيع ان نعاملهم معالمة فصيلة الثدييات بدون أن نجد مشكلة في
+في الوراثة، فمثلا نسطيع أن نعامل الحوت الزرق والحوت الابيض علي
+انهم فصيلت الحوت، وايضا ممكن أن نتعامل معهم على انهم فصيلة
+الثدييات، ومن هنا تجد أن نفس الكائن نستطيع التعامل معه بأكثر من شكل
+وصفة، والمثير ايضا في هذا المفهوم أن الحوت الازرق والشمبانزي
+نستطيع أن نعاملهم معالمة فصيلة الثدييات بدون أن نجد مشكلة في
 اختلافهم.
 </p></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org94062a1" class="outline-2">
-<h2 id="org94062a1">السي و البرمجة الكائنية</h2>
-<div class="outline-text-2" id="text-org94062a1">
+<div id="outline-container-org1fa6efe" class="outline-2">
+<h2 id="org1fa6efe">السي والبرمجة الكائنية</h2>
+<div class="outline-text-2" id="text-org1fa6efe">
 <p>
-السي كما نعرف تستخدم البرمجة الوظيفية، وتعتمد علي مستخدم الدالة في أن
-يحتفظ بمعلموت المستخدمة مع الدالة، و هذا على عكس مفهوم التغليف
-(Encapsulation) الذي يجمع المعلومات او الصفات مع الطرق في شكل واحدة
-وتسطيع التعامل معهم جميعا عن طريق الكائن.  و هذا المفهوم نسطيع ان نقوم
-به في السي عن طريق الهيكل (Struct) فمثلا دعنا نصنع هيكل لمضلع في هيئة
+السي كما نعرف تستخدم البرمجة الوظيفية، وتعتمد علي مستخدم الدالة في
+الاحتفاظ بالبينات المستخدمة مع الدالة، وهذا على عكس مفهوم التغليف
+(Encapsulation) الذي يجمع المعلومات او الصفات مع الطرق في كائن واحد
+وتسطيع التعامل معهم جميعا عن طريق الكائن.  وهذا المفهوم نسطيع تطبيقه
+في السي عن طريق الهيكل (Struct) فمثلا دعنا نصنع هيكل لمضلع في هيئة
 فصيلة.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C">typedef struct polygon polygon_t;
+<pre class="src src-C" id="orgb3152d4">typedef struct polygon polygon_t;
 struct polygon {
       int nsides;                       /* عدد الضلوع */
-      int (*cal_permiter)(polygon_t *); /* دالة لحساب المحيط */
-      int (*cal_area)(polygon_t *);     /* دالة لحساب المساحة  */
+      int (*cal_permiter)(polygon_t *); /* مؤشر لدالة لحساب المحيط */
+      int (*cal_area)(polygon_t *);     /* مؤشر لدالة لحساب المساحة  */
 };
 </pre>
 </div>
 
 
 <p>
-نستطيع ان نعتبر الهيكل Polygon كفصيلة مجردة (Abstract Class)، ومن هنا
-نسطيع ان نقوم بصنع فصيلة ترثها مثل المربع و المستطيل. ولنقوم بذلك
-يمكننا ان نصنع هيكلين اخريين ونجعل الهيكل Polygon احد اعضاء الهيكل.
+لاحظ استخدام مؤشرات الدوال سنستخدمهم لاحقا، ولكن لاحظ استخدام
+<code>polygon_t</code> كوسيط (Parameter)، وهذا يطابق <code>self</code> في البرمجة الكائنية في
+البايثون واستخدام <code>this</code> في بعض اللغات الكائنية، فستساعدنا لمعرفة
+الكائن المطلوب استخدامه.
+</p>
+
+<p>
+نستطيع أن نعتبر الهيكل Polygon كفصيلة مجردة (Abstract Class)، ومن هنا
+نسطيع أن نقوم بصنع فصيلة ترثها مثل المربع والمستطيل. ولنقوم بذلك
+يمكننا أن نصنع هيكلين اخريين ونجعل الهيكل Polygon احد اعضاء الهيكل.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-C">typedef struct square square_t;
-
+<pre class="src src-C" id="orge8d4055">typedef struct square square_t;
 struct square {
-    polygon_t polygon;          /* يرث هيكل الضلع */
+    polygon_t polygon;          /* يرث هيكل المضلع */
     int length;                 /* طول المربع */
 };
-
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-C">typedef struct rectangle rectangle_t;
-
+<pre class="src src-C" id="orge8ebd16">
+typedef struct rectangle rectangle_t;
 struct rectangle {
-    polygon_t polygon;          /* يرث هيكل الضلع */
+    polygon_t polygon;          /* يرث هيكل المضلع */
     int length;                 /* طول المستطيل */
     int width;                 /* عرض المستطيل*/
 };
-
 </pre>
 </div>
 
-
 <p>
-والان نستطيع ان نعتبر هذة وراثة، بحيث ان كل فصيلة جديدة إن ارادت وراثة
-هيكل المضلع يمكنها فقط وضعه في الهيكل داخلها، و عندما نريد ان نعامل
+والان نستطيع أن نعتبر هذه وراثة، بحيث أن كل فصيلة جديدة إن ارادت وراثة
+هيكل المضلع يمكنها فقط وضعه في الهيكل داخلها، وعندما نريد أن نعامل
 المستطيل كمضلع نتعامل مع جزء المضلع الذي بداخله.
 </p>
 </div>
@@ -708,9 +734,291 @@ struct rectangle {
 <div class="outline-text-2" id="text-org31aada3">
 <p>
 ولآن لقد انشئنا هيكل يحاكي مفهوم الوراثة، ولكن حتى الان لانملك كائن او
-شكل يشبه البرمجة الكائنية.  لكي نصنع كائن يمكننا ان نصنع دالة بناء
-(Constructor)، لصنع ذلك لها وجهين وجه باستخدام الحجز الثابت (Static
-Allocation) واخر باستخدام الحجز المتحرك (Dynamic allocation).
+شكل يشبه البرمجة الكائنية.  لكي نصنع كائن يمكننا أن نصنع دالة بناء
+(Constructor)، لصنع ذلك لها وجهين: وجه باستخدام الحجز الثابت (Static
+Allocation)، واخر باستخدام الحجز المتحرك (Dynamic allocation).  الفكرة
+من دالة البناء هي استخدامها لنضع قيم مبدئية في متغيرات الهيكل، مثل
+مؤشرات الدوال التي توجد في هيكل المضلع <code>cal_area ,cal_permiter</code>, والتي
+يجب أن نجعلهم يشيرون الي دوال معينة كي نستطيع أن نستخدمهم لاحقا، بحيث
+نحاكي فكرة التغليف.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C" id="org56c0c1d">
+int rect_cal_area(polygon_t *poly)
+{
+    rectangle_t *rect = (rectangle_t *) poly; /* هنا نستخدم فكرة تعدد الاشكال */
+    return rect-&gt;length * rect-&gt;width;
+}
+
+int rect_cal_permiter(polygon_t *poly)
+{
+    rectangle_t *rect = (rectangle_t *) poly; /* هنا نستخدم فكرة تعدد الاشكال */
+    return 2 * (rect-&gt;length + rect-&gt;width);
+}
+
+void rect_init_static(rectangle_t *rect, int length, int width)
+{
+    rect-&gt;length = length;
+    rect-&gt;width = width;
+    rect-&gt;polygon.cal_permiter = rect_cal_permiter;
+    rect-&gt;polygon.cal_area = rect_cal_area;
+}
+
+rectangle_t * rect_init(int length, int width)
+{
+    rectangle_t *rect = malloc(sizeof(rectangle_t));
+    if (!rect)
+        return NULL;
+    rect-&gt;length = length;
+    rect-&gt;width = width;
+    rect-&gt;polygon.cal_permiter = rect_cal_permiter;
+    rect-&gt;polygon.cal_area = rect_cal_area;
+    return rect;
+}
+</pre>
+</div>
+
+<p>
+في هذا الكود عرفنا دوال للمستطيل، ومنها الدوال لحسابة المحيط والمساحة،
+وتري في الكود أعلاه أننا استخدمنا التحويل (casting) لنحول من نوع
+<code>polygon_t</code> الي <code>rectangle_t</code>, واستطعنا أن نفعل ذلك لاننا نعرف أن من
+يستخدم هذه الدوال من نوع <code>rectangle_t</code>, وايضا لاننا وضعنا ال <code>polygon</code> في
+هيكل ال <code>rectangle_t</code> في المقدمة، والسي تأكد أن اول عضو في الهيكل دائما
+يكون نفس عنوان الهيكل، وإحتجنا التحويل للتعامل مع المتغيرات في هيكل
+المستطيل، وسيوضح كل شئ عندما نستخدمه الان.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-C">
+int main()
+{
+
+    rectangle_t *rect1, rect2;
+    polygon_t *poly1, *poly2;
+    int area1, area2, prem1, prem2;
+
+    rect1 = rect_init(5, 10); /* نستخدم الحجز المتحرك */
+    rect_init_static(&amp;rect2, 3, 10); /* نستخدم الحجز الثابت */
+
+    poly1 = &amp;rect1-&gt;polygon;    /* نستطيع ايضا أن نكتبها: poly1 = rect1 */
+    poly2 = &amp;rect2.polygon;     /* نستطيع ايضا أن نكتبها: poly2 = &amp;rect2 */
+    /* نحتاج إرسال نفس الهيكل كوسيط للدالة لكي تصل لصفات الكائن */
+    area1 = poly1-&gt;cal_area(poly1);
+    prem1 = poly1-&gt;cal_permiter(poly1);
+    area2 = poly2-&gt;cal_area(poly2);
+    prem2 = poly2-&gt;cal_permiter(poly2);
+
+    printf("rect1: area:%d  prem:%d\n", area1, prem1);
+    printf("rect2: area:%d  prem:%d\n", area2, prem2);
+}
+</pre>
+</div>
+
+<pre class="example">
+rect1: area:50  prem:30
+rect2: area:30  prem:26
+</pre>
+
+
+
+<p>
+ومن الكود اعلاه نرى استخدام تعددية الاشكال، فاستطعنا أن نستخدم مؤشر من
+نوع المضلع مع المستطيل، يمكننا ايضا أن نفعل الامر ذاته مع المربع، و
+بهذا نستطيع استخدام نفس مؤشر المضلع لنشير الى مربع او مستطيل!
+</p>
+
+<p>
+في حالة الحجز المتحرك سنحتاج أن نحرر الحجز، ولفعل ذلك نحتاج أن نكتب
+دالة هدم (Deconstructer)، وفيها نستخدم دالة <code>free</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge3b3f39" class="outline-2">
+<h2 id="orge3b3f39">التحويل الى اسفل (Downcasting)</h2>
+<div class="outline-text-2" id="text-orge3b3f39">
+<p>
+لقد رأينا نوعين من التحويل، من المستطيل الي المضلع وهذا تحويل الي
+اعلي، من الوارث الي الموروث، وهذا سهل لاننا نسطيع أن نستخدم العضو
+<code>polygon</code> الذي في الهيكل لفعل ذلك.
+</p>
+
+<p>
+أما التحويل إلى اسفل يحتاج الي الحيلة، استطعنا فعلها بسهولة مسبقا لانه
+كان اول عضو في الهيكل، وأول عضو كما ذكرنا يملك نفس عنوان الهيكل كما
+فعلنا في الدالتان <code>rect_cal_area</code> و <code>rect_cal_permiter</code>, ولكن ماذا لو كان
+العضو الثاني في الهيكل؟ الاجابة هي <code>offsetof</code>, وهو مختصر (macro) معرف في
+<b>stddef.h</b> يساعدك في حساب مكان العضو في الذاكرة بالنسبة الى الهيكل، ولكي
+يحسب ذلك يحتاج الى وسيطين: اسم الهيكل، واسم العضو الذي تريد حساب
+موقعه.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">struct test {
+    int a;
+    int b;
+};
+
+printf("offsetof(a) = %d\n", offsetof(struct test, a));
+printf("offsetof(b) = %d\n", offsetof(struct test, b));
+printf("ofssetof(b) - offsetof(a) = %d\n", offsetof(struct test, b) - offsetof(struct test, a));
+</pre>
+</div>
+
+<pre class="example">
+offsetof(a) = 0
+offsetof(b) = 4
+ofssetof(b) - offsetof(a) = 4
+</pre>
+
+
+<p>
+كما نرى من المثال أن <code>b</code> تبعد عن <code>a</code> -و ايضاً من البداية- ٤ بايت، ويمكننا
+استخدام تلك العملية للتحويل من مؤشر يشير إلي <code>b</code> إلي مؤشر يشير إلي
+الهيكل كله..
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">struct test {
+    int a;
+    int b;
+};
+
+struct test test = {
+    .a = 1995,
+    .b = 1312
+};
+int *pb = &amp;test.b;               /* وضع مؤشر علي b */
+struct test *ptest;
+ptest = (struct test*) ((char *)pb - offsetof(struct test, b));
+printf("a: %d\nb: %d\n", ptest-&gt;a, ptest-&gt;b);
+</pre>
+</div>
+
+<pre class="example">
+a: 1995
+b: 1312
+</pre>
+
+
+<p>
+لنحلل هذا السطر اكثر:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">ptest = (struct test*) ((char *)pb - offsetof(struct test, b));
+</pre>
+</div>
+
+<p>
+اولا نحسب موقع <code>b</code> من الهيكل عن طريق <code>offsetof</code>, وكما نعرف انها ٤ بايتس، و
+ الآن لكي نحول مؤشر <code>pb</code> إلي مؤشر <code>struct test</code>, يجب علينا طرح من المؤشر
+ pb ٤ بايتس لكي نشير الي اول الهيكل، واحتجنا أن نحول pb الى مؤشر من
+ نوع <code>char</code> لكي نطرح ٤ بايتس فقط، كما نعرف أن الجمع والطرح مع المؤشرات
+ تستخدم نوع المؤشر، فجمع ٤ على مؤشر من نوع <code>int</code> لن يكون ٤ بايتس بل ١٦
+ بايتس في حالة أن حجم int ٤ بايتس، ونحن هنا نريد فقط أن نطرح ٤ بايتس
+ ولذلك احتجنا للتحويل لنوع يستخدم واحد بايت.  وبهذا استطعنا أن نحول
+ الي اسفل. يمكننا ايضا كتابت هذه العملية في شكل مختصر كالتالي.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">
+#define child_of(ptr, type, member) (type *) ((char *)ptr - offsetof(type, member))
+
+int *pb = &amp;test.b;               /* وضع مؤشر علي b */
+struct test *ptest;
+ptest = child_of(pb, struct test, b);
+printf("a: %d\nb: %d\n", ptest-&gt;a, ptest-&gt;b);
+
+</pre>
+</div>
+
+<pre class="example">
+a: 1995
+b: 1312
+</pre>
+
+
+<p>
+ايضا يمكنك البحث عن تعريف مختصر <b>container_of</b> في كود لينكس، معرف بشكل
+اعمق قليلا من child_of التي ذكرناها في المثال، ولذلك انصح بالبحث عنه
+ايضا.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgde61966" class="outline-2">
+<h2 id="orgde61966">مثال اضافي</h2>
+<div class="outline-text-2" id="text-orgde61966">
+<p>
+دعنا نكتب مثال يظهر المسألة اكثر، يمكننا أن نصنع مصفوفة من مؤشرات الي
+polygon، ويمكننا أن ننشئ اكثر من نوع مثل مستطيل ومربع ومثلث مثلا،
+و ننشى دالة تمشي على هذه المصفوفة وتطبع المساحة لهم جميعا.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-C">
+
+
+void print_polygons(polygon_t *polgs[], int n)
+{
+    int i;
+    for (i = 0; i &lt; n; i++) {
+        int prem, area;
+        prem = polgs[i]-&gt;cal_permiter(polgs[i]);
+        area = polgs[i]-&gt;cal_area(polgs[i]);
+        printf("polygon num %d: area=%d, perm=%d\n", i, area, prem);
+    }
+}
+
+int main()
+{
+
+    rectangle_t *rect;
+    square_t *square;
+    triangle_t *triangle;
+    polygon_t *polygons[3];
+
+    rect = rect_init(5, 10); /* نستخدم الحجز المتحرك */
+    triangle = triangle_init(2, 10, 3, 2); /* نستخدم الحجز المتحرك */
+    square = square_init(5); /* نستخدم الحجز المتحرك */
+    /* والآن لنضعهم في مصفوفة من نوع المضلع */
+    polygons[0] = &amp;rect-&gt;polygon;
+    polygons[1] = &amp;square-&gt;polygon;
+    polygons[2] = &amp;triangle-&gt;polygon;
+
+    print_polygons(polygons, 3);
+}
+</pre>
+</div>
+
+<pre class="example">
+polygon num 0: area=50, perm=30
+polygon num 1: area=25, perm=20
+polygon num 2: area=10, perm=15
+</pre>
+
+
+<p>
+كما نرى من المثال اننا استطعنا نبني دالة تمشي على مصفوفة من نوع المضلع،
+وبهذا استطعنا أن نتعامل مع كل انواع المضلعات بنفس الدوال وبنفس
+الطريقة، بدون التعامل معهم كحالات خاصة، وهذا يوضح قوة تعدد الاشكال.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7e12ac3" class="outline-2">
+<h2 id="org7e12ac3">الملخص</h2>
+<div class="outline-text-2" id="text-org7e12ac3">
+<p>
+تعلمنا في هذا الخاطر كيف نستخدم البرمجة الكائنية في السي، واستطعنا ان
+نستخدم خصائصها ايضا مثل الوراثة وتعدد الاشكال، واسبتنا فاعلية
+استخدامهم، وتكلمنا ايضا عن offsetof وكيف نستطيع أن نستخدمها للتحويل
+إلي اسفل من موروث الى الوارث (أي من المضلع إلي المربع مثلا).  ويمكنك
+البحث في كود لينكس وستجد أمثلة كثيرة لتطبيق ما ذكرناه، مثل استخدام
+container_of، مع الكثير من برامج التعريف (Device Drivers).
 </p>
 </div>
 </div>
